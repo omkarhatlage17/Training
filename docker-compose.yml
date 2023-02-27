@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    ports:
+      - "60:60"
+    networks:
+      - frontend
+    volumes:
+      - ./app:/app
+  db:
+    image: postgres
+    networks:
+      - backend
+    volumes:
+      - db_data:/var/lib/postgresql/data
+  redis:
+    image: redis
+    networks:
+      - backend
+
+volumes:
+  db_data:
+
+networks:
+  frontend:
+  backend:
+
